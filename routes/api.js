@@ -22,6 +22,16 @@ router.post("/api/workouts", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
+// rout updating the Workout collection with an exercise
+router.put("/api/workouts/:id", (req, res) => {
+  db.Workout.updateOne({_id: req.params.id}, {$set: {exercise: req.body}})
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
 
 // router.post("/api/transaction/bulk", ({ body }, res) => {
 //   Transaction.insertMany(body)
