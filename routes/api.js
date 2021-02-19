@@ -24,7 +24,10 @@ router.post("/api/workouts", ({ body }, res) => {
 });
 // route updating the Workout collection with an exercise
 router.put("/api/workouts/:id", (req, res) => {
-  db.Workout.updateOne({_id: req.params.id}, {$set: {exercise: req.body}})
+  db.Workout.updateOne(
+    { _id: req.params.id },
+    { $push: { exercise: req.body } }
+  )
     .then((dbWorkout) => {
       res.json(dbWorkout);
     })
@@ -32,7 +35,7 @@ router.put("/api/workouts/:id", (req, res) => {
       res.status(400).json(err);
     });
 });
-// 
+//
 router.get("/api/workouts/range", (req, res) => {
   db.Workout.aggregate([
     { $addFields: { totalDuration: { $sum: "$exercise.duration" } } },
