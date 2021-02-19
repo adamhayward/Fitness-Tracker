@@ -9,10 +9,11 @@
 - [`Questions`](#Questions "ask the developer") 
 
 ## Description
+Please visit the deployed application [here](https://vast-river-54966.herokuapp.com/).
 This App logs multiple exercises in a workout on a given day. The user is able to track the name, type, weight, sets, reps, and duration of each exercise. For cardio exercise, the user is also able to track the distance traveled.
 
 ## Installation Instructions
-Simply click the following link to run the app.
+run `npm install` from your command line. 
 
 ## Usage
 Assist the user with reaching their fitness goals more quickly by allowing them to track their workout progress.
