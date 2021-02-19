@@ -14,6 +14,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^5.11.17",
+    "mongoose-data-seed": "^2.1.6",
     "morgan": "^1.10.0"
   }
 }
