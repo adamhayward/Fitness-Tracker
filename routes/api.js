@@ -20,6 +20,26 @@ router.post("/api/workouts", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
+// rout posting "Workouts" to the Workout collection 
+router.get("/api/exercise", ({ body }, res) => {
+  db.Workout.find({})
+    .then(dbWorkout => {
+      res.json(dbWorkout);
+    })
+    .catch(err => {
+      res.status(400).json(err);
+    });
+});
+// rout posting "Workouts" to the Workout collection 
+// router.post("/api/workouts", ({ body }, res) => {
+//   db.Workout.create(body)
+//     .then(dbWorkout => {
+//       res.json(dbWorkout);
+//     })
+//     .catch(err => {
+//       res.status(400).json(err);
+//     });
+// });
 
 
 

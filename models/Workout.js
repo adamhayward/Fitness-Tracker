@@ -2,8 +2,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-
-
+// Schema to be referenced 
 const ExerciseSchema = new Schema({
   type: {
     type: String,
@@ -30,8 +29,6 @@ const WorkoutSchema = new Schema({
   },
   exercise: [ExerciseSchema]
 });
-
-
 
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
