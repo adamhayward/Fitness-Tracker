@@ -1,7 +1,7 @@
 {
   "name": "mongoose_skeleton",
   "version": "1.0.0",
-  "description": " This App logs multiple exercises in a workout on a given day. The user is able to track the name, type, weight, sets, reps, and duration of each exercise. For cardio exercise, the user is also able to track the distance traveled.",
+  "description": "This App logs multiple exercises in a workout on a given day. The user is able to track the name, type, weight, sets, reps, and duration of each exercise. For cardio exercise, the user is also able to track the distance traveled.",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.11.15",
+    "mongoose": "^5.11.17",
     "morgan": "^1.10.0"
   }
 }
