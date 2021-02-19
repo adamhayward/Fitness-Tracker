@@ -1,8 +1,27 @@
-// creating/exporting schema model for a "Cardio" exercise
+// creating/exporting schema model for a "Reistance" exercise
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const Exercise = require("./Exercise.js")
+
+
+const ExerciseSchema = new Schema({
+  type: {
+    type: String,
+    required: "Type is required",
+  },
+  name: {
+    type: String,
+    required: "Type is required",
+  },
+  durration: {
+      type:Number,
+      durration: Number,
+  },
+  distance: Number,
+  weight: Number,
+  sets: Number,
+  reps: Number,
+});
 
 const WorkoutSchema = new Schema({
   day: {
@@ -12,6 +31,9 @@ const WorkoutSchema = new Schema({
   exercise: [ExerciseSchema]
 });
 
+
+
 const Workout = mongoose.model("Workout", WorkoutSchema);
 
 module.exports = Workout;
+
