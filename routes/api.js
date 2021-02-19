@@ -12,7 +12,7 @@ router.get("/api/workouts", (req, res) => {
       res.status(400).json(err);
     });
 });
-// rout posting "Workouts" to the Workout collection
+// route posting "Workouts" to the Workout collection
 router.post("/api/workouts", ({ body }, res) => {
   db.Workout.create(body)
     .then((dbWorkout) => {
@@ -22,7 +22,7 @@ router.post("/api/workouts", ({ body }, res) => {
       res.status(400).json(err);
     });
 });
-// rout updating the Workout collection with an exercise
+// route updating the Workout collection with an exercise
 router.put("/api/workouts/:id", (req, res) => {
   db.Workout.updateOne({_id: req.params.id}, {$set: {exercise: req.body}})
     .then((dbWorkout) => {
@@ -32,26 +32,17 @@ router.put("/api/workouts/:id", (req, res) => {
       res.status(400).json(err);
     });
 });
-
-// router.post("/api/transaction/bulk", ({ body }, res) => {
-//   Transaction.insertMany(body)
-//     .then(dbTransaction => {
-//       res.json(dbTransaction);
-//     })
-//     .catch(err => {
-//       res.status(400).json(err);
-//     });
-// });
-
-// router.get("/api/transaction", (req, res) => {
-//   Transaction.find({})
-//     .sort({ date: -1 })
-//     .then(dbTransaction => {
-//       res.json(dbTransaction);
-//     })
-//     .catch(err => {
-//       res.status(400).json(err);
-//     });
-// });
+// 
+router.get("/api/workouts/range", (req, res) => {
+  db.Workout.aggregate([
+    { $addFields: { totalDuration: { $sum: "$exercise.duration" } } },
+  ])
+    .then((dbWorkout) => {
+      res.json(dbWorkout);
+    })
+    .catch((err) => {
+      res.status(400).json(err);
+    });
+});
 
 module.exports = router;
