@@ -22,10 +22,10 @@ function generatePalette() {
 }
 
 function populateChart(data) {
-  let durations = data.map(({ totalDuration }) => totalDuration);
-  let totalDuation = totalDuation(data);
-  let pounds = calculateTotalWeight(data);
   let workouts = workoutNames(data);
+  let totalDuations = totalDurtion(workouts, data);
+  let durations = data.map(({ totalDuration }) => totalDuration);
+  let pounds = calculateTotalWeight(data);
   const colors = generatePalette();
 
   let line = document.querySelector("#canvas").getContext("2d");
@@ -141,7 +141,7 @@ function populateChart(data) {
         {
           label: "Exercises Performed",
           backgroundColor: colors,
-          data: totalDuation,
+          data: totalDuations,
         },
       ],
     },
@@ -153,25 +153,25 @@ function populateChart(data) {
     },
   });
 
-  let donutChart = new Chart(pie2, {
-    type: "doughnut",
-    data: {
-      labels: workouts,
-      datasets: [
-        {
-          label: "Exercises Performed",
-          backgroundColor: colors,
-          data: pounds,
-        },
-      ],
-    },
-    options: {
-      title: {
-        display: true,
-        text: "Exercises Performed",
-      },
-    },
-  });
+  // let donutChart = new Chart(pie2, {
+  //   type: "doughnut",
+  //   data: {
+  //     labels: workouts,
+  //     datasets: [
+  //       {
+  //         label: "Exercises Performed",
+  //         backgroundColor: colors,
+  //         data: pounds,
+  //       },
+  //     ],
+  //   },
+  //   options: {
+  //     title: {
+  //       display: true,
+  //       text: "Exercises Performed",
+  //     },
+  //   },
+  // });
 }
 
 function calculateTotalWeight(data) {
@@ -192,6 +192,29 @@ function calculateTotalWeight(data) {
   return totals;
 }
 
+function totalDurtion(exerciseNames, data) {
+  let totals = [];
+
+  exerciseNames.forEach((name) => {
+    totals.push({ workoutName: name, duration: 0 });
+  });
+
+  data.forEach((workout) => {
+    workout.exercises.forEach((exercise) => {
+      let totalsObj = totals.find(
+        obj => obj.workoutName === exercise.name
+      );
+      totalsObj.duration += exercise.duration;
+    });
+  });
+
+  let val = [];
+  totals.forEach((obj) => {
+    val.push(obj.duration);
+  })
+  return val;
+}
+
 function workoutNames(data) {
   let workouts = [];
 
@@ -205,16 +228,7 @@ function workoutNames(data) {
   return [...new Set(workouts)];
 }
 
-function totalDuation(data) {
-  let totals = [];
 
-  data.forEach((workout) => {
-    totals.push({ workoutName: workout, duration: 0 });
-  });
-
-  // return de-duplicated array with JavaScript `Set` object
-  return [...new Set(workouts)];
-}
 
 // get all workout data from back-end
 API.getWorkoutsInRange().then(populateChart);
